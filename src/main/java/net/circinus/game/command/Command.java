@@ -109,6 +109,14 @@ public class Command {
 		if(temp2.get(0).equals("@audio")){
 			return;
 		}
+		if(temp2.get(0).equals("@camera")){
+			if(temp2.get(1).equals("setPos")){
+				Main.getCore().getUni().getCamera().setPos(Integer.parseInt(temp2.get(2)), Integer.parseInt(temp2.get(3)), Integer.parseInt(temp2.get(4)), Integer.parseInt(temp2.get(5)));
+				return;
+			}
+			
+			return;
+		}
 		Out.print("MINOR", "Command '" + temp2.get(0) + "' is not known");
 
 

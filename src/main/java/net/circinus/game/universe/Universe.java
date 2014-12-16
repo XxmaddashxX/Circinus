@@ -27,6 +27,13 @@ import org.newdawn.slick.Color;
 
 public class Universe {
 	
+	public Camera getCamera() {
+		return camera;
+	}
+
+	public void setCamera(Camera camera) {
+		this.camera = camera;
+	}
 	private ArrayList<Moon> moons;
 	private ArrayList<Planet> planets;
 	private ArrayList<Sun> suns;

@@ -68,6 +68,13 @@ public class Camera {
 		glRotated(this.cameraRotation, 0, 0, 1);
 		
 	}
+	public void setPos(double x, double y, double z, double rotation){
+		this.cameraX = x;
+		this.cameraY = y;
+		this.cameraZoom = z;
+		this.cameraRotation = rotation;
+		
+	}
 	
 
 }

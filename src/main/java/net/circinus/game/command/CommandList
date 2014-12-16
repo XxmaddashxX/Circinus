@@ -27,3 +27,9 @@ Commands
 @star
 @moon
 @audio
+@camera
+	setPos
+		number x
+		number y
+		number zoom
+		number rotation
