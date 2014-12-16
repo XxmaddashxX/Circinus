@@ -1,5 +1,6 @@
 package net.circinus.game;
 
+import net.circinus.game.command.Command;
 import net.circinus.game.debug.Debug;
 import net.circinus.game.physics.AU;
 import net.circinus.game.physics.Conversion;
@@ -32,8 +33,7 @@ public class Main{
 		new Thread(new ZRuntime()).start();
 		new Thread(new DebugThread()).start();
 		//new Thread(new FPSThread()).start();
-		System.out.println(Conversion.AU_to_Lighyear(new AU(666666)));
-		System.out.println(Conversion.Lightyear_to_AU(Conversion.AU_to_Lighyear(new AU(666666))).getAu());
+		
 		core = new GameCore();
 
 		core.start();
