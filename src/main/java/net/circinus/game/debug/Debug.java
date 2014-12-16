@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.io.PrintStream;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,15 +12,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 
-import net.circinus.game.threads.ZRuntime;
-
 public class Debug {
 	private SpringLayout layout;
 	private JFrame frame;
 	private JPanel messages, errors;
 	private JTextArea messarea, errarea;
 	public static JTextArea runtime_Field, memory_Field, memory_used,
-	process_area;
+	process_area, input_Field;
 	public Debug(){
 		//createGui();
 	}
@@ -32,6 +31,7 @@ public class Debug {
 		Container contentPane = frame.getContentPane();
 		SpringLayout layout = new SpringLayout();
 		contentPane.setLayout(layout);
+		JButton input_button = new JButton("Enter");
 		JLabel messageLabel = new JLabel("Messages");
 		JLabel errorLabel = new JLabel("Errors");
 		JLabel runtimeLabel = new JLabel("Runtime");
@@ -39,6 +39,7 @@ public class Debug {
 		JLabel memoryused = new JLabel("Memory Used");
 		JLabel processlabel = new JLabel("Processors");
 		JLabel oslabel = new JLabel("OS");
+		contentPane.add(input_button);
 		contentPane.add(memoryused);
 		contentPane.add(errorLabel);
 		contentPane.add(messageLabel);
@@ -54,6 +55,8 @@ public class Debug {
 		JTextArea os_Field = new JTextArea(1, 10);
 		JTextArea error_Field = new JTextArea(20, 50);
 		JTextArea message_Field = new JTextArea(20, 50);
+		 input_Field = new JTextArea(1 , 25);
+		contentPane.add(input_Field);
 		JScrollPane message_scrollPane = new JScrollPane(message_Field);
 		contentPane.add(message_scrollPane);
 		contentPane.add(runtime_Field);
@@ -66,7 +69,7 @@ public class Debug {
 		JScrollPane error_scrollPane = new JScrollPane(error_Field);
 		contentPane.add(error_scrollPane);
 		error_scrollPane.setPreferredSize(new Dimension(450, 450));
-		
+		input_button.addActionListener(new Actions());
 
 
 		layout.putConstraint(SpringLayout.NORTH, message_scrollPane,
@@ -170,8 +173,27 @@ public class Debug {
 		layout.putConstraint(SpringLayout.WEST, oslabel,
 				125,
 				SpringLayout.WEST, runtime_Field);
+		layout.putConstraint(SpringLayout.NORTH, input_Field,
+				80,
+				SpringLayout.NORTH, runtime_Field);
+
+		layout.putConstraint(SpringLayout.WEST, input_Field,
+				300,
+				SpringLayout.WEST, runtime_Field);
+		layout.putConstraint(SpringLayout.NORTH, input_button,
+				-5,
+				SpringLayout.NORTH, input_Field);
+
+		layout.putConstraint(SpringLayout.WEST, input_button,
+				300,
+				SpringLayout.WEST, input_Field);
 	
 	
+		input_Field.setEditable(true);
+		input_Field.setLineWrap(false);
+		input_Field.setWrapStyleWord(false);
+		
+		
 		message_Field.setEditable(false);
 		message_Field.setLineWrap(true);
 		message_Field.setWrapStyleWord(true);

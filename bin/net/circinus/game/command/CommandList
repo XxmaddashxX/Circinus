@@ -4,13 +4,26 @@ Commands
 @object
 @entity
 @display
+ 	setFullscreen 
+  		true
+  		false
+	setScreenLocation
+		number x (> -1)
+			number y (> -1)
+  
 @system
+ 	exit_hard
+
 @item
 @config
 @debug
+	testOutput
+		errors
+		messages
 @control
 @help
 @universe
 @planet
 @star
 @moon
+@audio

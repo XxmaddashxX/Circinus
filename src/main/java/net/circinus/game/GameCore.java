@@ -31,6 +31,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
 public class GameCore {
 	private boolean isRunning, isPaused, isFullscreen;
@@ -38,6 +39,7 @@ public class GameCore {
 	private Fonts fonts;
 	private Textures textures;
 	private Universe uni;
+	private int locx = -1, locy = -1;
 	public GameCore(){
 		
 	}
@@ -79,6 +81,7 @@ public class GameCore {
 			Display.sync(60);
 			Display.setVSyncEnabled(true);
 			Display.create();
+			
 			Mouse.create();
 			Keyboard.create();
 			
@@ -104,11 +107,11 @@ public class GameCore {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
-		glMatrixMode(GL_MODELVIEW);
 		
+		glMatrixMode(GL_MODELVIEW);
 	}
 	private void setupParameters(){
-		this.isFullscreen = false;
+		this.setFullscreen(false);
 		this.isPaused = false;
 		this.isRunning = true;
 		this.textures = new Textures();
@@ -154,8 +157,19 @@ public class GameCore {
 		if(Display.wasResized()){
 			this.initialize();
 		}
+		try {
+			Display.setFullscreen(isFullscreen);
+		} catch (LWJGLException e) {
+		
+			e.printStackTrace();
+		}
 		if(Display.isCloseRequested()){
 			this.isRunning = false;
+		}
+		if(locy > -1 && locx > -1){
+			Display.setLocation(locx, locy);
+			this.locx = -1;
+			this.locy = -1;
 		}
 		
 	}
@@ -189,6 +203,25 @@ public class GameCore {
 	public void setUni(Universe uni) {
 		this.uni = uni;
 	}
+	public boolean isFullscreen() {
+		return isFullscreen;
+	}
+	public void setFullscreen(boolean isFullscreen) {
+		this.isFullscreen = isFullscreen;
+	}
+	public void setLocation(int x, int y){
+		if(x < -1){
+			Out.print("MINOR", "Invalid screen location " + x);
+			return;
+		}
+		if(y < -1){
+			Out.print("MINOR", "Invalid screen location " + y);
+			return;
+		}
+		this.locx = x;
+		this.locy = y;
+	}
+	
 	
 
 }
