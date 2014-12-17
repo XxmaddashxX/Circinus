@@ -24,6 +24,7 @@ import net.circinus.game.font.Fonts;
 import net.circinus.game.logic.buttons.GeneralButton;
 import net.circinus.game.render.TextureHandler;
 import net.circinus.game.render.Textures;
+import net.circinus.game.threads.KeyListener;
 import net.circinus.game.universe.Universe;
 
 import org.lwjgl.LWJGLException;
@@ -31,7 +32,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 
 public class GameCore {
 	private boolean isRunning, isPaused, isFullscreen;
@@ -84,6 +84,7 @@ public class GameCore {
 			
 			Mouse.create();
 			Keyboard.create();
+			//new Thread(new KeyListener()).start();
 			
 		}
 		catch (LWJGLException e1) {

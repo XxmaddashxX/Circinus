@@ -1,19 +1,17 @@
 package net.circinus.game;
 
-import net.circinus.game.command.Command;
 import net.circinus.game.debug.Debug;
 import net.circinus.game.debug.Out;
-import net.circinus.game.physics.AU;
-import net.circinus.game.physics.Conversion;
 import net.circinus.game.threads.DebugStamp;
 import net.circinus.game.threads.DebugThread;
 import net.circinus.game.threads.SystemInfo;
 import net.circinus.game.threads.ZRuntime;
 import net.circinus.game.url.NewsGetter;
+import net.circinus.game.util.GameCapatabilities;
 
 public class Main{
 	
-	
+	public static GameCapatabilities caps;
 	public static GameCore core;
 	public static Debug debug;
 	public static void main(String[] args0){
@@ -30,7 +28,7 @@ public class Main{
 		
 		Main.debug = new Debug();
 		Main.debug.createGui();
-		
+		caps = new GameCapatabilities();
 		new Thread(new DebugStamp()).start();
 		new Thread(new SystemInfo()).start();
 		new Thread(new ZRuntime()).start();
@@ -38,8 +36,7 @@ public class Main{
 		//new Thread(new FPSThread()).start();
 		NewsGetter.getNews();
 		Out.print("INFO", NewsGetter.news);
-		core = new GameCore();
-
+		core = new GameCore();				
 		core.start();
 
 	}

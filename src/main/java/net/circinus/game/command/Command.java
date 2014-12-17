@@ -43,15 +43,15 @@ public class Command {
 					Main.getCore().setLocation(Integer.parseInt(temp2.get(2)), Integer.parseInt(temp2.get(3)));
 				}
 				catch(NullPointerException e){
-					
+
 				}
-				
+
 				return;
 			}
 			Out.print("MINOR", "Command '" + temp2.get(1) + "' is not a known command for @display");
 			return;
-			
-			
+
+
 		}
 		if(temp2.get(0).equals("@system")){
 			if(temp2.get(1).equals("exit_hard")){
@@ -114,7 +114,22 @@ public class Command {
 				Main.getCore().getUni().getCamera().setPos(Integer.parseInt(temp2.get(2)), Integer.parseInt(temp2.get(3)), Integer.parseInt(temp2.get(4)), Integer.parseInt(temp2.get(5)));
 				return;
 			}
-			
+
+			return;
+		}
+		if(temp2.get(0).equals("@dev")){
+			if(temp2.get(1).equals("enableDevKit")){
+				if(temp2.get(2).equals("true")){
+
+					return;
+				}
+				if(temp2.get(2).equals("false")){
+
+					return;
+				}
+				return;
+			}
+
 			return;
 		}
 		Out.print("MINOR", "Command '" + temp2.get(0) + "' is not known");
