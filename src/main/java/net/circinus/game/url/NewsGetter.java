@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class NewsGetter {
-	
+	public static String news;
 	public static void getNews(){
+		ArrayList<String> strings = new ArrayList<String>();
 		 URL oracle = null;
 		try {
 			oracle = new URL("https://github.com/XxmaddashxX/Circinus/blob/master/util/news.txt");
@@ -36,7 +38,14 @@ public class NewsGetter {
 	        try {
 				while ((inputLine = in.readLine()) != null) 
 				    if(inputLine.contains("variable_news:")){
-				    	System.out.println(inputLine);
+				    	
+				    	
+				    	// <td id="LC1" class="blob-code js-file-line">variable_news:Woop woop</td>
+				    	String temp1[] = inputLine.split(":");
+				    	
+				    	String temp2 = temp1[1];
+				    	String temp3[] = temp2.split("<");
+				    	strings.add(temp3[0]);
 				    }
 				    	
 			} catch (IOException e) {
@@ -49,6 +58,10 @@ public class NewsGetter {
 			
 				e.printStackTrace();
 			}
+	        news = strings.get(0);
+	        for(int i = 1; i < strings.size(); i++){
+	        	news = news + " " + strings.get(i);
+	        }
 	}
 
 }

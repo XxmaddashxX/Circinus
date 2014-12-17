@@ -1,2 +1,2 @@
-variable_news:Woop woop
-variable_news:yeah
+variable_news:This is a test for the news
+variable_news:this should also be included.

@@ -2,6 +2,7 @@ package net.circinus.game;
 
 import net.circinus.game.command.Command;
 import net.circinus.game.debug.Debug;
+import net.circinus.game.debug.Out;
 import net.circinus.game.physics.AU;
 import net.circinus.game.physics.Conversion;
 import net.circinus.game.threads.DebugStamp;
@@ -36,6 +37,7 @@ public class Main{
 		new Thread(new DebugThread()).start();
 		//new Thread(new FPSThread()).start();
 		NewsGetter.getNews();
+		Out.print("INFO", NewsGetter.news);
 		core = new GameCore();
 
 		core.start();
