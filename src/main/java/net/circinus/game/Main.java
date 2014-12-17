@@ -8,6 +8,7 @@ import net.circinus.game.threads.DebugStamp;
 import net.circinus.game.threads.DebugThread;
 import net.circinus.game.threads.SystemInfo;
 import net.circinus.game.threads.ZRuntime;
+import net.circinus.game.url.NewsGetter;
 
 public class Main{
 	
@@ -28,12 +29,13 @@ public class Main{
 		
 		Main.debug = new Debug();
 		Main.debug.createGui();
+		
 		new Thread(new DebugStamp()).start();
 		new Thread(new SystemInfo()).start();
 		new Thread(new ZRuntime()).start();
 		new Thread(new DebugThread()).start();
 		//new Thread(new FPSThread()).start();
-		
+		NewsGetter.getNews();
 		core = new GameCore();
 
 		core.start();

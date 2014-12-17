@@ -12,16 +12,16 @@ public class NewsGetter {
 	public static void getNews(){
 		 URL oracle = null;
 		try {
-			oracle = new URL("http://www.oracle.com/");
+			oracle = new URL("://github.com/XxmaddashxX/Circinus/blob/master/util/news.txt");
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	        URLConnection yc = null;
 			try {
 				yc = oracle.openConnection();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 	        BufferedReader in = null;
@@ -35,7 +35,10 @@ public class NewsGetter {
 	        String inputLine;
 	        try {
 				while ((inputLine = in.readLine()) != null) 
-				    System.out.println(inputLine);
+				    if(inputLine.contains("variable_news:")){
+				    	System.out.println(inputLine);
+				    }
+				    	
 			} catch (IOException e) {
 				
 				e.printStackTrace();
