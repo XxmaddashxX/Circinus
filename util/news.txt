@@ -1,1 +1,2 @@
 variable_news:Woop woop
+variable_news:yeah

@@ -12,7 +12,7 @@ public class NewsGetter {
 	public static void getNews(){
 		 URL oracle = null;
 		try {
-			oracle = new URL("://github.com/XxmaddashxX/Circinus/blob/master/util/news.txt");
+			oracle = new URL("https://github.com/XxmaddashxX/Circinus/blob/master/util/news.txt");
 		} catch (MalformedURLException e) {
 			
 			e.printStackTrace();
