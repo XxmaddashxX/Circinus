@@ -45,58 +45,12 @@ public class GameCore {
 	}
 	public void start(){
 		Out.print("INFO", "Game Started");
-		this.setupDisplay();
+		
 		this.initialize();
 		this.setupParameters();
 		this.gameloop();
 	}
-	private void setupDisplay(){
-		Out.print("INFO", "Starting Display Creation");
-		try{
-			Display.setResizable(true);
-			DisplayMode displayMode = null;
-	        DisplayMode[] modes = Display.getAvailableDisplayModes();
-
-	         for (int i = 0; i < modes.length; i++)
-	         {
-	             if (modes[i].getWidth() == 800
-	             && modes[i].getHeight() == 600
-	             && modes[i].isFullscreenCapable())
-	               {
-	                    displayMode = modes[i];
-	               }
-	         }
-
-			/*try {
-				Display.setIcon(new ByteBuffer[] {
-						new ImageIOImageData().imageToByteBuffer(ImageIO.read(new File("src/main/resources/assets/sahara/textures/Drifitng_Collosus_icon2.png")), false, false, null),
-						new ImageIOImageData().imageToByteBuffer(ImageIO.read(new File("src/main/resources/assets/sahara/textures/Drifitng_Collosus_icon.png")), false, false, null)
-				});
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}*/
-			Display.setDisplayMode(displayMode);
-			Display.setTitle("Circinus: Into the Stars");
-			Display.sync(60);
-			Display.setVSyncEnabled(true);
-			Display.create();
-			
-			Mouse.create();
-			Keyboard.create();
-			//new Thread(new KeyListener()).start();
-			
-		}
-		catch (LWJGLException e1) {
-			
-			e1.printStackTrace();
-		}
-		Out.print("INFO", "Created Display, Mouse, KeyBoard");
-		Out.print("INFO", "Display " + Display.getWidth() + "x" + Display.getHeight());
-		Out.print("INFO", "Display_Resizeable = " + Display.isResizable());
-		
-		
-	}
+	
 	private void initialize(){
 		
 		glEnable(GL_TEXTURE_2D);
@@ -164,14 +118,7 @@ public class GameCore {
 		
 			e.printStackTrace();
 		}
-		if(Display.isCloseRequested()){
-			this.isRunning = false;
-		}
-		if(locy > -1 && locx > -1){
-			Display.setLocation(locx, locy);
-			this.locx = -1;
-			this.locy = -1;
-		}
+		
 		
 	}
 	private void render(){
@@ -210,18 +157,7 @@ public class GameCore {
 	public void setFullscreen(boolean isFullscreen) {
 		this.isFullscreen = isFullscreen;
 	}
-	public void setLocation(int x, int y){
-		if(x < -1){
-			Out.print("MINOR", "Invalid screen location " + x);
-			return;
-		}
-		if(y < -1){
-			Out.print("MINOR", "Invalid screen location " + y);
-			return;
-		}
-		this.locx = x;
-		this.locy = y;
-	}
+
 	
 	
 

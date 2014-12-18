@@ -7,6 +7,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 
 import net.circinus.game.Main;
+import net.circinus.game.Setup;
 import net.circinus.game.debug.Out;
 
 public class Command {
@@ -40,7 +41,7 @@ public class Command {
 			}
 			if(temp2.get(1).equals("setScreenLocation")){
 				try{
-					Main.getCore().setLocation(Integer.parseInt(temp2.get(2)), Integer.parseInt(temp2.get(3)));
+					Setup.setLocation(Integer.parseInt(temp2.get(2)), Integer.parseInt(temp2.get(3)));
 				}
 				catch(NullPointerException e){
 
