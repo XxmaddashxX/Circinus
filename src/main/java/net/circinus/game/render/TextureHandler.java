@@ -1,13 +1,12 @@
 package net.circinus.game.render;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glTexCoord2f;
-import static org.lwjgl.opengl.GL11.glVertex2f;
 
 import java.io.IOException;
 
+import net.circinus.game.Setup;
+
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureImpl;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -38,12 +37,14 @@ public class TextureHandler {
 		texture.bind();
 		// Draw a textured quad
 		glBegin(GL_QUADS);
+		
+		
 		glTexCoord2f(0, 0); glVertex2f(posX, posY);
 		glTexCoord2f(0, 1); glVertex2f(posX, posY +texture.getTextureHeight());
 		glTexCoord2f(1, 1); glVertex2f(posX +texture.getTextureWidth(), posY +texture.getTextureHeight());
 		glTexCoord2f(1, 0); glVertex2f(posX + texture.getTextureWidth(), posY);
 		glEnd();
-		TextureImpl.bindNone();
+		
 	}
 	public static void drawRotatedTexture(Texture texture, float posx, float posy, float degrees){
 		glPushMatrix();
@@ -63,6 +64,23 @@ public class TextureHandler {
 		
 		
 	}
+	public static void drawScaled(Texture texture, float posX, float posY){
+		if(texture == null){
+			return;
+		}
+		org.newdawn.slick.Color.white.bind();
+		TextureImpl.bindNone();
+		texture.bind();
+		// Draw a textured quad
+		glBegin(GL_QUADS);
+		
+		glTexCoord2f(0, 0); glVertex2d(posX, posY);
+		glTexCoord2f(0, 1); glVertex2d(posX, (posY +texture.getTextureHeight()) * Setup.getAmount());
+		glTexCoord2f(1, 1); glVertex2d((posX +texture.getTextureWidth()) * Setup.getAmount(), (posY +texture.getTextureHeight())* Setup.getAmount());
+		glTexCoord2f(1, 0); glVertex2d((posX + texture.getTextureWidth()) * Setup.getAmount(), posY);
+		glEnd();
+	}
+	
 
 
 }

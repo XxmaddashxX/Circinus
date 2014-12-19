@@ -53,17 +53,7 @@ public class GameCore {
 	
 	private void initialize(){
 		
-		glEnable(GL_TEXTURE_2D);
-		glClearColor(0,0,0,0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		glMatrixMode(GL_MODELVIEW);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
 		
-		glMatrixMode(GL_MODELVIEW);
 	}
 	private void setupParameters(){
 		this.setFullscreen(false);

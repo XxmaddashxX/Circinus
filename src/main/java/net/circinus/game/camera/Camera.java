@@ -1,6 +1,7 @@
 package net.circinus.game.camera;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
+import net.circinus.game.Setup;
 
 import org.lwjgl.opengl.Display;
 public class Camera {
@@ -44,22 +45,7 @@ public class Camera {
 		this.cameraY = this.cameraY + y;
 	}
 	public void cameraSetup(){
-		/*glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(70, width/height, 0.3f, 1000);
-		glMatrixMode(GL_MODELVIEW);
-		//glEnable(GL_DEPTH_TEST);
-		 * */
-		glEnable(GL_TEXTURE_2D);
-		glClearColor(0,0,0,0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		glMatrixMode(GL_MODELVIEW);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
-		glMatrixMode(GL_MODELVIEW);
+		
 	}
 	public void update(){
 		glTranslated(this.cameraX, this.cameraY, this.cameraZoom);
@@ -75,6 +61,13 @@ public class Camera {
 		this.cameraRotation = rotation;
 		
 	}
+	public void addZoom(double num){
+		Setup.addZoom(num);
+	}
+	public void decreaseZoom(double num){
+		Setup.decreaseZoom(num);
+	}
+	
 	
 
 }

@@ -87,6 +87,15 @@ public class Command {
 			return;
 		}
 		if(temp2.get(0).equals("@help")){
+			if(temp2.get(1).equals("display")){
+				CommandHelp.printDisplayHelp();
+				return;
+			}
+			if(temp2.get(1).equals("camera")){
+				CommandHelp.printCameraHelp();
+				return;
+			}
+			
 			return;
 		}
 		if(temp2.get(0).equals("@ship")){

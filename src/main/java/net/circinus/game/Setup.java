@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glScaled;
 import static org.lwjgl.opengl.GL11.glViewport;
 import net.circinus.game.debug.Out;
 import net.circinus.game.font.Fonts;
@@ -34,21 +35,14 @@ public class Setup {
 	
 	public static int locx;
 	public static int locy;
+	public static double amount;
 	public static void doSetup(){
 		setupDisplay();
+		amount = 1;
+		graphics();
 		locx = -1;
 		locy = -1;
-		glEnable(GL_TEXTURE_2D);
-		glClearColor(0,0,0,0);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		glMatrixMode(GL_MODELVIEW);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
-		
-		glMatrixMode(GL_MODELVIEW);
+	
 		Main.textures = new Textures();
 		Main.fonts = new Fonts();
 		Main.caps = new GameCapatabilities();
@@ -140,6 +134,57 @@ public class Setup {
 			Setup.locx = -1;
 			Setup.locy = -1;
 		}
+	}
+	public static void graphics(){
+		glEnable(GL_TEXTURE_2D);
+		glClearColor(0,0,0,0);
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		/*
+		//glViewport(0, 0, Display.getWidth(), Display.getHeight());
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
+		
+		glMatrixMode(GL_MODELVIEW);
+		*/
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity(); // Resets any previous projection matrices
+		glOrtho(0, Display.getWidth() * amount, Display.getHeight() * amount, 0, 1, -1);
+		
+		glMatrixMode(GL_MODELVIEW);
+		
+	}
+	public static void zoom(double amount){
+		double centerX = Display.getWidth() / 2;
+		double centerY = Display.getHeight() / 2;
+		//glTranslated(centerX, centerY, 0);
+		Setup.amount = amount + 1;
+		graphics();
+		
+	
+	}
+	public static void addZoom(double num){
+		if(Setup.amount + num > 0.06){
+			return;
+		}
+		Setup.amount = amount + num;
+		graphics();
+	}
+	public static void decreaseZoom(double num){
+		if(Setup.amount - num > -0.1){
+			Setup.amount = amount - num;
+			graphics();
+		}
+		
+	}
+	public static double getAmount() {
+		return amount;
+	}
+	public static void setAmount(double amount) {
+		Setup.amount = amount;
 	}
 	
 

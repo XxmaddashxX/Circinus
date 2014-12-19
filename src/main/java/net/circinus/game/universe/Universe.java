@@ -132,7 +132,12 @@ public class Universe {
 	    //Keyboard
 		while(Keyboard.next()){
 			if(Keyboard.getEventKeyState()){
-				
+				if(Keyboard.getEventKey() == Keyboard.KEY_F){
+					this.camera.addZoom(0.1);
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_R){
+					this.camera.decreaseZoom(0.1);
+				}
 			}
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)){
@@ -164,6 +169,7 @@ public class Universe {
 		if(Keyboard.isKeyDown(Keyboard.KEY_E)){
 			this.camera.setCameraRotation(this.camera.getCameraRotation() + 1);
 		}
+		
 		
 		
 
@@ -214,7 +220,7 @@ public class Universe {
 				TextureHandler.drawTexture(sun.getTexture(), (float)sun.getSunX(), (float)sun.getSunY());
 			}
 			this.drawMapUI();
-			TextureHandler.drawRotatedTexture(textures.getTexture(textures.background_test), 400  - (float)this.camera.getCameraX(), 400 - (float)this.camera.getCameraY(), (float)-this.camera.getCameraRotation());
+			TextureHandler.drawScaled(Main.textures.getTexture(textures.background_test), 400, 400);
 			if(this.activetype != null){
 				if(this.activetype.equals("type_planet")){
 					Planet planet = this.planets.get(this.activeobject);

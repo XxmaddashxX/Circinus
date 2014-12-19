@@ -24,5 +24,8 @@ public class Demo{
 	private void addBodies(){
 		this.stars.add(new Sun("SN 1996cr", 0, 0, 0, Main.getTextures().getTexture(Main.getTextures().enviroment_star)));
 	}
+	private void gameLoop(){
+		
+	}
 
 }
