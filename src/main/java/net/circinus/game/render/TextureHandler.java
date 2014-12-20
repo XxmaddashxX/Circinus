@@ -1,12 +1,18 @@
 package net.circinus.game.render;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glTexCoord2f;
+import static org.lwjgl.opengl.GL11.glVertex2d;
+import static org.lwjgl.opengl.GL11.glVertex2f;
 
 import java.io.IOException;
 
 import net.circinus.game.Setup;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureImpl;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -79,6 +85,23 @@ public class TextureHandler {
 		glTexCoord2f(1, 1); glVertex2d((posX +texture.getTextureWidth()) * Setup.getAmount(), (posY +texture.getTextureHeight())* Setup.getAmount());
 		glTexCoord2f(1, 0); glVertex2d((posX + texture.getTextureWidth()) * Setup.getAmount(), posY);
 		glEnd();
+	}
+	public static void drawScaleandRotate(Texture texture, float posX, float posY, float degrees){
+		glPushMatrix();
+		//glTranslatef(posx,posy, 0); 
+		glRotatef(degrees, 0, 0, 1 ); // now rotate
+
+		texture.bind();
+		glBegin(GL_QUADS);
+		glTexCoord2f(0, 0); glVertex2d(posX, posY);
+		glTexCoord2f(0, 1); glVertex2d(posX, posY +texture.getTextureHeight()  * Setup.getAmount());
+		glTexCoord2f(1, 1); glVertex2d(posX +texture.getTextureWidth() * Setup.getAmount(), posY +texture.getTextureHeight() * Setup.getAmount());
+		glTexCoord2f(1, 0); glVertex2d(posX + texture.getTextureWidth()  * Setup.getAmount(), posY);
+		
+		glEnd();
+		//glTranslatef(-posx,-posy, 0);
+		glRotatef(-degrees, 0, 0, 1 );
+		
 	}
 	
 

@@ -22,6 +22,8 @@ Commands
 		messages
 @control
 @help
+	display
+	camera
 @universe
 @planet
 @star

@@ -57,7 +57,16 @@ public class Command {
 		if(temp2.get(0).equals("@system")){
 			if(temp2.get(1).equals("exit_hard")){
 				System.exit(-1);
+				return;
 			}
+			if(temp2.get(1).equals("setCognito")){
+				if(temp2.get(2).equals("true")){
+					Setup.setCognito(true);
+					return;
+				}
+				return;
+			}
+			
 			return;
 		}
 		if(temp2.get(0).equals("@item")){

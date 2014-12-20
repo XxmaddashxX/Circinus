@@ -6,6 +6,7 @@ import static org.lwjgl.util.glu.GLU.gluPerspective;
 import java.util.ArrayList;
 
 import net.circinus.game.Main;
+import net.circinus.game.Setup;
 import net.circinus.game.camera.Camera;
 import net.circinus.game.debug.Out;
 import net.circinus.game.font.FontHandler;
@@ -17,6 +18,7 @@ import net.circinus.game.planet.Planet;
 import net.circinus.game.render.TextureHandler;
 import net.circinus.game.render.Textures;
 import net.circinus.game.sun.Sun;
+import net.circinus.game.util.PlanetCreator;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -53,7 +55,7 @@ public class Universe {
 		this.materials = new MaterialList();
 		Out.print("INFO", "Materials initialized");
 		
-		
+		Out.print("INFO", PlanetCreator.createClass(5400));
 		
 		this.camera = new Camera(0, 0 , 0 , 0 );
 		this.menu = "screen_map";
@@ -68,6 +70,7 @@ public class Universe {
 		this.suns.add(new Sun("Ach-Or-Jolsk", 0, 0, 10, textures.getTexture(textures.a)));
 		this.planets.add(new Planet("06478 - DCF", 0 , 250, 1, this.suns.get(0), true, textures.getTexture(textures.b)));
 		this.moons.add(new Moon("DV - 49", 0, 350, 10, this.planets.get(0), textures.getTexture(textures.c), false));
+		this.moons.add(new Moon("TEST", 0 , 400, 20, this.planets.get(0), textures.getTexture(textures.c), true));
 		for(int i = 0; i < this.planets.size(); i++){
 			this.planets.get(i).getData().randomizeData();
 		}
@@ -184,7 +187,7 @@ public class Universe {
 			this.planets.get(i).update();
 		}
 		if(Display.wasResized()){
-			this.reinitialize();
+			Setup.graphics();
 			this.updateButtons();
 		}
 		glLoadIdentity();
@@ -220,7 +223,7 @@ public class Universe {
 				TextureHandler.drawTexture(sun.getTexture(), (float)sun.getSunX(), (float)sun.getSunY());
 			}
 			this.drawMapUI();
-			TextureHandler.drawScaled(Main.textures.getTexture(textures.background_test), 400, 400);
+			
 			if(this.activetype != null){
 				if(this.activetype.equals("type_planet")){
 					Planet planet = this.planets.get(this.activeobject);
@@ -229,6 +232,7 @@ public class Universe {
 					FontHandler.drawString(fonts.getFont(fonts.font_timesnewroman_18), (Display.getWidth() - 140) - (int)this.camera.getCameraX(), 155 - (int)this.camera.getCameraY(), "X: " + (int)planet.getPlanetx() + " Y: " + (int)planet.getPlanety(), Color.black);
 				}
 			}
+			
 			//this.drawOrbits();
 		}
 		if(this.menu.equals("screen_ship")){
@@ -244,16 +248,16 @@ public class Universe {
 	private void drawMapUI(){
 		for(int i = 0; i < 4; i++){
 			for(int u = 0; u < Display.getHeight() / 64 + 2; u++){
-				TextureHandler.drawRotatedTexture(textures.getTexture(textures.background_test), (Display.getWidth()  + 20 - (64 * i)) - (float)this.camera.getCameraX(), (u * 64) - (float)this.camera.getCameraY(), (float)-this.camera.getCameraRotation());
+				TextureHandler.drawRotatedTexture(textures.getTexture(textures.background_test), (Display.getWidth() - (64 * i)) * (float)Setup.getAmount()- (float)this.camera.getCameraX(), (u * 64) * (float)Setup.getAmount() - (float)this.camera.getCameraY(), (float)-this.camera.getCameraRotation());
 			}
 		}
 		for(int i = 0; i < Display.getWidth()/ 64 + 1; i++){
-			TextureHandler.drawRotatedTexture(textures.getTexture(textures.background_test),(64 * i) - (float)this.camera.getCameraX() , -20 - (float)this.camera.getCameraY(), (float)- this.camera.getCameraRotation());
+			TextureHandler.drawRotatedTexture(textures.getTexture(textures.background_test),(64 * i) * (float)Setup.getAmount()- (float)this.camera.getCameraX() , -20 /(float)Setup.getAmount() - (float)this.camera.getCameraY(), (float)- this.camera.getCameraRotation());
 		}
 
 		for(int i = 0; i < this.buttons_map.size(); i++){
 			GeneralButton but = this.buttons_map.get(i);
-			TextureHandler.drawRotatedTexture(but.getTexture(), (float)but.getButtonx() - (float)this.camera.getCameraX(), (float)but.getButtony() - (float)this.camera.getCameraY(), -(float)this.camera.getCameraRotation());
+			TextureHandler.drawScaleandRotate(but.getTexture(), (float)but.getButtonx() - (float)this.camera.getCameraX(), (float)but.getButtony() - (float)this.camera.getCameraY(), -(float)this.camera.getCameraRotation());
 			if(but.getButtontext() != null){
 				FontHandler.drawString(fonts.getFont(fonts.font_timesnewroman_18), (int)but.getButtonx() + 2, (int)but.getButtony() + 2 , but.getButtontext(), Color.black);
 			}

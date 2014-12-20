@@ -13,7 +13,7 @@ public class NewsGetter {
 	public static void getNews(){
 		ArrayList<String> strings = new ArrayList<String>();
 		 URL oracle = null;
-		try {
+		try  {
 			oracle = new URL("https://github.com/XxmaddashxX/Circinus/blob/master/util/news.txt");
 		} catch (MalformedURLException e) {
 			
